@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArdorBot — AI Robotics Intelligence</title>
+  <meta name="description" content="ArdorBot builds advanced AI robotics and intelligent solutions for automotive, logistics, and consumer markets." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050810;
+      --surface: #0d1220;
+      --border: #1a2235;
+      --accent: #6c8aff;
+      --accent2: #00d4ff;
+      --text: #e8edf5;
+      --muted: #6b7a99;
+      --green: #00e5a0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--accent2); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      background: rgba(5,8,16,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-weight: 800; font-size: 1.25rem; letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      font-size: 0.8rem; font-weight: 600; padding: 8px 20px;
+      border: 1px solid var(--accent); border-radius: 8px;
+      color: var(--accent) !important; transition: all 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); color: var(--bg) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(108,138,255,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 60% 40% at 80% 60%, rgba(0,212,255,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 100px;
+      border: 1px solid var(--border); background: var(--surface);
+      font-size: 0.75rem; font-weight: 500; color: var(--muted);
+      margin-bottom: 32px; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 900; letter-spacing: -0.04em;
+      line-height: 1.05; max-width: 900px; margin-bottom: 24px;
+    }
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.125rem; color: var(--muted); max-width: 560px;
+      margin-bottom: 48px; line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      padding: 14px 32px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; font-weight: 600; font-size: 0.95rem;
+      border: none; cursor: pointer; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; color: #fff; }
+    .btn-secondary {
+      padding: 14px 32px; border-radius: 10px;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text); font-weight: 500; font-size: 0.95rem;
+      cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); background: rgba(108,138,255,0.06); color: var(--text); }
+
+    /* GRID BG */
+    .grid-bg {
+      position: absolute; inset: 0; pointer-events: none; z-index: -1;
+      background-image:
+        linear-gradient(rgba(108,138,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108,138,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+    }
+
+    /* SECTIONS */
+    section { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px;
+    }
+    .section-desc { font-size: 1rem; color: var(--muted); max-width: 520px; line-height: 1.7; }
+
+    /* PRODUCTS */
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px; margin-top: 48px;
+    }
+    .product-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .product-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .product-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(108,138,255,0.15), rgba(0,212,255,0.1));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 20px;
+    }
+    .product-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .product-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+    .product-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 16px; font-size: 0.8rem; font-weight: 600;
+      color: var(--accent); transition: gap 0.2s;
+    }
+    .product-link:hover { gap: 10px; color: var(--accent2); }
+
+    /* DIVIDER */
+    .divider { height: 1px; background: var(--border); max-width: 1200px; margin: 0 auto; }
+
+    /* STATS */
+    .stats-row {
+      display: flex; gap: 48px; flex-wrap: wrap; margin-top: 48px;
+    }
+    .stat-item { flex: 1; min-width: 140px; }
+    .stat-num {
+      font-size: 2.5rem; font-weight: 900; letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+    /* CTA */
+    .cta-section {
+      text-align: center; padding: 100px 24px;
+      background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(108,138,255,0.08) 0%, transparent 70%);
+    }
+    .cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -0.04em; margin-bottom: 16px; }
+    .cta-section p { color: var(--muted); margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-brand { font-weight: 700; font-size: 0.95rem; }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 0.8rem; color: var(--muted); }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 0.75rem; color: var(--muted); }
+
+    /* ANIMATIONS */
+    @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fade-up 0.6s ease forwards; }
+    .fade-up-1 { animation-delay: 0.1s; opacity: 0; }
+    .fade-up-2 { animation-delay: 0.2s; opacity: 0; }
+    .fade-up-3 { animation-delay: 0.3s; opacity: 0; }
+    .fade-up-4 { animation-delay: 0.4s; opacity: 0; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      section { padding: 64px 24px; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ArdorBot</div>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://slimlight.ardorbot.com" target="_blank" class="nav-cta">SlimLight Store →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge fade-up"><span></span> AI Robotics Company</div>
+  <h1 class="fade-up fade-up-1">
+    Intelligence<br /><span class="gradient">That Moves</span>
+  </h1>
+  <p class="fade-up fade-up-2">
+    ArdorBot builds advanced AI robotics and embedded intelligence systems — from automotive lighting to logistics automation — engineered to perform in the real world.
+  </p>
+  <div class="hero-actions fade-up fade-up-3">
+    <a href="https://slimlight.ardorbot.com" target="_blank" class="btn-primary">Explore SlimLight →</a>
+    <a href="#products" class="btn-secondary">Our Products</a>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-label">Products</div>
+  <h2 class="section-title">Built for Performance.<br />Designed to Scale.</h2>
+  <p class="section-desc">From consumer DTC to industrial-grade systems, our product lines cover the full spectrum of intelligent hardware.</p>
+
+  <div class="products-grid">
+    <div class="product-card fade-up fade-up-1">
+      <div class="product-icon">🚗</div>
+      <h3>SlimLight</h3>
+      <p>Ultra-slim Mini LED vehicle light identifier. &lt;5mm thickness, 5000+ nit brightness, IP67 waterproof. The next generation of automotive signature lighting.</p>
+      <a href="https://slimlight.ardorbot.com" target="_blank" class="product-link">Visit Store →</a>
+    </div>
+    <div class="product-card fade-up fade-up-2">
+      <div class="product-icon">🤖</div>
+      <h3>AI Robotics Platform</h3>
+      <p>Custom AI agent systems for logistics, manufacturing, and smart infrastructure. Built on large language models with real-world sensor integration.</p>
+      <a href="#contact" class="product-link">Inquire →</a>
+    </div>
+    <div class="product-card fade-up fade-up-3">
+      <div class="product-icon">💡</div>
+      <h3>Embedded Intelligence</h3>
+      <p>AI-powered embedded modules for OEM/ODM integration. Speech, vision, and decision-making in a chip-scale footprint.</p>
+      <a href="#contact" class="product-link">Inquire →</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="stats-row">
+    <div class="stat-item fade-up fade-up-1">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Product Lines</div>
+    </div>
+    <div class="stat-item fade-up fade-up-2">
+      <div class="stat-num">AI</div>
+      <div class="stat-label">Native Platform</div>
+    </div>
+    <div class="stat-item fade-up fade-up-3">
+      <div class="stat-num">DTC</div>
+      <div class="stat-label">Global Sales Model</div>
+    </div>
+    <div class="stat-item fade-up fade-up-4">
+      <div class="stat-num">IP67</div>
+      <div class="stat-label">Product Standards</div>
+    </div>
+  </div>
+
+  <p style="margin-top: 48px; color: var(--muted); max-width: 600px; line-height: 1.8; font-size: 0.95rem;">
+    ArdorBot is an AI-first technology company headquartered in China, operating across consumer electronics, automotive components, and industrial robotics. We combine deep learning models with precision hardware engineering to create products that think and perform.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Ready to build <span style="background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">the future</span>?</h2>
+  <p>Whether you're a retailer, distributor, or engineering team — we'd love to hear from you.</p>
+  <a href="mailto:contact@ardorbot.com" class="btn-primary">Get in Touch</a>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-brand">ArdorBot</div>
+  <ul class="footer-links">
+    <li><a href="https://slimlight.ardorbot.com" target="_blank">SlimLight Store</a></li>
+    <li><a href="mailto:contact@ardorbot.com">Contact</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 ArdorBot. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
