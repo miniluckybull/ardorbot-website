@@ -6,7 +6,8 @@
   <title>ArdorBot — AI Robotics Intelligence</title>
   <meta name="description" content="ArdorBot builds advanced AI robotics and intelligent solutions for automotive, logistics, and consumer markets." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -19,6 +20,19 @@
       --text: #e8edf5;
       --muted: #6b7a99;
       --green: #00e5a0;
+
+      /* Genesis theme tokens */
+      --gen-bg: #000000;
+      --gen-bg-1: #0A0A0A;
+      --gen-bg-2: #111111;
+      --gen-border: #1e1e1e;
+      --gen-border-subtle: #222222;
+      --gen-accent: #00FF66;
+      --gen-accent-glow: rgba(0, 255, 102, 0.15);
+      --gen-blue: #00E5FF;
+      --gen-text: #ffffff;
+      --gen-text-muted: #9CA3AF;
+      --gen-text-dim: #6B7280;
     }
 
     html { scroll-behavior: smooth; }
@@ -34,12 +48,19 @@
     a { color: inherit; text-decoration: none; }
     a:hover { color: var(--accent2); }
 
-    /* NAV */
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ================================================================
+       MAIN SITE — NAV
+       ================================================================ */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 48px; height: 64px;
-      background: rgba(5,8,16,0.85);
+      background: rgba(5,8,16,0.88);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
@@ -51,6 +72,8 @@
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--muted); transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a.genesis-nav { color: var(--gen-accent); opacity: 0.85; }
+    .nav-links a.genesis-nav:hover { opacity: 1; color: var(--gen-accent); }
     .nav-cta {
       font-size: 0.8rem; font-weight: 600; padding: 8px 20px;
       border: 1px solid var(--accent); border-radius: 8px;
@@ -58,7 +81,9 @@
     }
     .nav-cta:hover { background: var(--accent); color: var(--bg) !important; }
 
-    /* HERO */
+    /* ================================================================
+       MAIN SITE — HERO
+       ================================================================ */
     .hero {
       min-height: 100vh; display: flex; flex-direction: column;
       align-items: center; justify-content: center; text-align: center;
@@ -107,8 +132,6 @@
       cursor: pointer; transition: border-color 0.2s, background 0.2s;
     }
     .btn-secondary:hover { border-color: var(--accent); background: rgba(108,138,255,0.06); color: var(--text); }
-
-    /* GRID BG */
     .grid-bg {
       position: absolute; inset: 0; pointer-events: none; z-index: -1;
       background-image:
@@ -118,7 +141,9 @@
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
     }
 
-    /* SECTIONS */
+    /* ================================================================
+       MAIN SITE — SECTIONS
+       ================================================================ */
     section { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
     .section-label {
       font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
@@ -130,7 +155,6 @@
     }
     .section-desc { font-size: 1rem; color: var(--muted); max-width: 520px; line-height: 1.7; }
 
-    /* PRODUCTS */
     .products-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px; margin-top: 48px;
@@ -141,6 +165,8 @@
       transition: border-color 0.2s, transform 0.2s;
     }
     .product-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .product-card.genesis-card { border-color: rgba(0,255,102,0.2); }
+    .product-card.genesis-card:hover { border-color: var(--gen-accent); }
     .product-icon {
       width: 48px; height: 48px; border-radius: 12px;
       background: linear-gradient(135deg, rgba(108,138,255,0.15), rgba(0,212,255,0.1));
@@ -155,14 +181,12 @@
       color: var(--accent); transition: gap 0.2s;
     }
     .product-link:hover { gap: 10px; color: var(--accent2); }
+    .product-link.genesis-link { color: var(--gen-accent); }
+    .product-link.genesis-link:hover { color: #00ff99; }
 
-    /* DIVIDER */
     .divider { height: 1px; background: var(--border); max-width: 1200px; margin: 0 auto; }
 
-    /* STATS */
-    .stats-row {
-      display: flex; gap: 48px; flex-wrap: wrap; margin-top: 48px;
-    }
+    .stats-row { display: flex; gap: 48px; flex-wrap: wrap; margin-top: 48px; }
     .stat-item { flex: 1; min-width: 140px; }
     .stat-num {
       font-size: 2.5rem; font-weight: 900; letter-spacing: -0.04em;
@@ -171,7 +195,6 @@
     }
     .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
 
-    /* CTA */
     .cta-section {
       text-align: center; padding: 100px 24px;
       background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(108,138,255,0.08) 0%, transparent 70%);
@@ -179,7 +202,6 @@
     .cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -0.04em; margin-bottom: 16px; }
     .cta-section p { color: var(--muted); margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
 
-    /* FOOTER */
     footer {
       border-top: 1px solid var(--border);
       padding: 40px 48px;
@@ -191,7 +213,6 @@
     .footer-links a:hover { color: var(--text); }
     .footer-copy { font-size: 0.75rem; color: var(--muted); }
 
-    /* ANIMATIONS */
     @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     .fade-up { animation: fade-up 0.6s ease forwards; }
     .fade-up-1 { animation-delay: 0.1s; opacity: 0; }
@@ -199,12 +220,306 @@
     .fade-up-3 { animation-delay: 0.3s; opacity: 0; }
     .fade-up-4 { animation-delay: 0.4s; opacity: 0; }
 
-    /* RESPONSIVE */
+    /* ================================================================
+       GENESIS SUB-SECTION
+       ================================================================ */
+    #genesis {
+      background: var(--gen-bg);
+      color: var(--gen-text);
+      position: relative;
+    }
+
+    .gen-container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+    /* Header / hero */
+    .gen-hero {
+      min-height: auto;
+      display: flex; align-items: center;
+      justify-content: center; text-align: center;
+      padding: 100px 24px 80px;
+      position: relative;
+    }
+    .gen-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,255,102,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .gen-hero-eyebrow {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; color: var(--gen-accent); letter-spacing: 2px;
+      margin-bottom: 28px;
+      opacity: 0; animation: gen-fadeUp 0.8s ease forwards 0.2s;
+    }
+    .gen-hero h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -2px;
+      max-width: 860px; margin: 0 auto 24px;
+      opacity: 0; animation: gen-fadeUp 0.8s ease forwards 0.4s;
+    }
+    .gen-hero h2 .highlight { color: var(--gen-accent); }
+    .gen-hero-sub {
+      font-size: clamp(15px, 2vw, 19px);
+      color: var(--gen-text-muted); line-height: 1.7;
+      max-width: 620px; margin: 0 auto 40px;
+      opacity: 0; animation: gen-fadeUp 0.8s ease forwards 0.6s;
+    }
+    .gen-hero-actions {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      opacity: 0; animation: gen-fadeUp 0.8s ease forwards 0.8s;
+    }
+    .gen-hero-visual {
+      margin-top: 64px; opacity: 0; animation: gen-fadeUp 1s ease forwards 1s;
+    }
+    .gen-box-render {
+      display: inline-block;
+      width: 380px; max-width: 90vw;
+      aspect-ratio: 1.6/1;
+      background: var(--gen-bg-2);
+      border: 1px solid var(--gen-border);
+      border-radius: 24px;
+      position: relative; overflow: hidden;
+      box-shadow: 0 0 80px rgba(0,255,102,0.08), 0 40px 80px rgba(0,0,0,0.8);
+    }
+    .gen-box-render::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,255,102,0.12) 0%, transparent 70%);
+    }
+    .gen-box-body {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 16px;
+    }
+    .gen-box-icon {
+      width: 80px; height: 80px;
+      border: 2px solid var(--gen-border);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--gen-bg-1);
+    }
+    .gen-leds { display: flex; gap: 10px; }
+    .gen-led {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--gen-accent);
+      box-shadow: 0 0 8px var(--gen-accent);
+      animation: gen-led-pulse 2s ease-in-out infinite;
+    }
+    .gen-led:nth-child(2) { animation-delay: 0.3s; background: var(--gen-blue); box-shadow: 0 0 8px var(--gen-blue); }
+    .gen-led:nth-child(3) { animation-delay: 0.6s; }
+    .gen-led:nth-child(4) { animation-delay: 0.9s; background: var(--gen-blue); box-shadow: 0 0 8px var(--gen-blue); }
+    .gen-led:nth-child(5) { animation-delay: 1.2s; }
+    @keyframes gen-led-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .gen-box-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--gen-text-dim); letter-spacing: 3px;
+    }
+    @keyframes gen-fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Genesis ticker */
+    .gen-ticker {
+      border-top: 1px solid var(--gen-border-subtle);
+      border-bottom: 1px solid var(--gen-border-subtle);
+      background: var(--gen-bg-1);
+      padding: 16px 0; overflow: hidden;
+    }
+    .gen-ticker-inner { display: flex; white-space: nowrap; animation: gen-ticker 30s linear infinite; }
+    .gen-ticker-item {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 0 40px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; color: var(--gen-text-muted); letter-spacing: 1px;
+    }
+    .gen-ticker-item::before { content: '◆'; color: var(--gen-accent); font-size: 8px; }
+    @keyframes gen-ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Genesis content section */
+    .gen-content { padding: 100px 0; }
+    .gen-split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 768px) { .gen-split-grid { grid-template-columns: 1fr; } }
+    .gen-split-card {
+      padding: 40px; border-radius: 16px;
+      border: 1px solid var(--gen-border);
+      background: var(--gen-bg-2);
+    }
+    .gen-split-card.problem:hover { border-color: #ff6b6b; }
+    .gen-split-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 2px;
+      padding: 4px 10px; border-radius: 4px;
+      display: inline-block; margin-bottom: 20px;
+    }
+    .gen-tag-chaos { background: rgba(255,107,107,0.12); color: #ff6b6b; border: 1px solid rgba(255,107,107,0.2); }
+    .gen-tag-genesis { background: var(--gen-accent-glow); color: var(--gen-accent); border: 1px solid rgba(0,255,102,0.2); }
+    .gen-split-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .gen-split-card p { color: var(--gen-text-muted); line-height: 1.75; font-size: 15px; }
+
+    /* Bento */
+    .gen-bento { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 16px; margin-top: 60px; }
+    .gen-bento-card {
+      background: var(--gen-bg-2); border: 1px solid var(--gen-border);
+      border-radius: 16px; padding: 32px;
+    }
+    .gen-bento-card.wide { grid-column: span 2; }
+    @media (max-width: 900px) { .gen-bento { grid-template-columns: 1fr 1fr; } .gen-bento-card.wide { grid-column: span 2; } }
+    @media (max-width: 600px) { .gen-bento { grid-template-columns: 1fr; } .gen-bento-card.wide { grid-column: span 1; } }
+    .gen-bento-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--gen-accent-glow);
+      border: 1px solid rgba(0,255,102,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; font-size: 22px;
+    }
+    .gen-bento-card h4 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .gen-bento-card p { color: var(--gen-text-muted); line-height: 1.7; font-size: 14px; }
+
+    /* Terminal */
+    .gen-terminal-wrap {
+      background: var(--gen-bg-1); border: 1px solid var(--gen-border);
+      border-radius: 16px; overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 60px;
+    }
+    .gen-terminal-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px; background: var(--gen-bg-2);
+      border-bottom: 1px solid var(--gen-border);
+    }
+    .gen-tb { width: 12px; height: 12px; border-radius: 50%; }
+    .gen-tb-r { background: #ff5f57; }
+    .gen-tb-y { background: #ffbd2e; }
+    .gen-tb-g { background: #28c840; }
+    .gen-terminal-title { font-size: 12px; color: var(--gen-text-dim); margin-left: 8px; letter-spacing: 1px; }
+    .gen-terminal-body { padding: 24px; min-height: 200px; }
+    .gen-tline { font-size: 13px; line-height: 2; color: var(--gen-text-muted); }
+    .gen-tline .gen-prompt { color: var(--gen-accent); }
+    .gen-tline .gen-cmd { color: var(--gen-text); }
+    .gen-tline .gen-out { color: var(--gen-text-dim); }
+    .gen-tline .gen-ok { color: var(--gen-blue); }
+    .gen-tline .gen-cursor {
+      display: inline-block; width: 8px; height: 16px;
+      background: var(--gen-accent); vertical-align: middle;
+      animation: gen-blink 1s step-end infinite; margin-left: 2px;
+    }
+    @keyframes gen-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* Founder section */
+    .gen-founder-section {
+      background: var(--gen-bg-1);
+      border-top: 1px solid var(--gen-border-subtle);
+      border-bottom: 1px solid var(--gen-border-subtle);
+      padding: 100px 0;
+    }
+    .gen-founder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    @media (max-width: 768px) { .gen-founder-grid { grid-template-columns: 1fr; gap: 40px; } }
+    .gen-founder-visual {
+      aspect-ratio: 1/1; border-radius: 20px;
+      background: var(--gen-bg-2); border: 1px solid var(--gen-border);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 20px;
+      position: relative; overflow: hidden;
+    }
+    .gen-founder-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,255,102,0.1) 0%, transparent 60%);
+    }
+    .gen-key-slot {
+      width: 80px; height: 30px; border-radius: 6px;
+      border: 2px dashed var(--gen-border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--gen-text-dim); letter-spacing: 2px;
+    }
+    .gen-founder-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--gen-text-dim); letter-spacing: 2px; text-align: center;
+    }
+    .gen-founder-steps { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+    .gen-founder-steps li {
+      display: flex; align-items: flex-start; gap: 16px;
+      font-size: 15px; color: var(--gen-text-muted); line-height: 1.6;
+    }
+    .gen-step-num {
+      flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+      background: var(--gen-accent-glow); border: 1px solid rgba(0,255,102,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gen-accent);
+    }
+
+    /* Genesis CTA */
+    .gen-cta-section {
+      text-align: center;
+      padding: 100px 24px;
+      position: relative;
+    }
+    .gen-cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,255,102,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .gen-cta-section h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 5vw, 52px); font-weight: 800;
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    .gen-cta-section p { color: var(--gen-text-muted); margin-bottom: 40px; font-size: 17px; }
+    .gen-waitlist-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 500px; margin: 0 auto; }
+    .gen-waitlist-form input {
+      flex: 1; min-width: 240px;
+      padding: 14px 20px; border-radius: 8px;
+      background: var(--gen-bg-2); border: 1px solid var(--gen-border);
+      color: var(--gen-text); font-size: 15px; font-family: 'Inter', sans-serif;
+      outline: none; transition: border-color 0.3s;
+    }
+    .gen-waitlist-form input::placeholder { color: var(--gen-text-dim); }
+    .gen-waitlist-form input:focus { border-color: var(--gen-accent); }
+    .gen-glow-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px;
+      background: var(--gen-accent); color: #000;
+      font-weight: 700; font-size: 15px; border-radius: 8px;
+      border: none; cursor: pointer;
+      box-shadow: 0 0 20px var(--gen-accent-glow), 0 0 40px var(--gen-accent-glow);
+      transition: all 0.3s ease;
+    }
+    .gen-glow-btn:hover {
+      box-shadow: 0 0 30px rgba(0,255,102,0.4), 0 0 80px var(--gen-accent-glow);
+      transform: translateY(-2px);
+    }
+    .gen-disclaimer { font-size: 13px; color: var(--gen-text-dim); margin-top: 16px; }
+    .gen-success { display: none; margin-top: 20px; color: var(--gen-accent); font-weight: 600; }
+
+    /* Genesis footer */
+    .gen-footer {
+      border-top: 1px solid var(--gen-border-subtle);
+      padding: 40px 0;
+    }
+    .gen-footer-inner {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .gen-footer-links { display: flex; gap: 24px; }
+    .gen-footer-links a { font-size: 14px; color: var(--gen-text-dim); text-decoration: none; transition: color 0.3s; }
+    .gen-footer-links a:hover { color: var(--gen-accent); }
+    .gen-footer-copy { font-size: 13px; color: var(--gen-text-dim); }
+
+    /* Scroll reveal */
+    .gen-reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .gen-reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ================================================================
+       RESPONSIVE
+       ================================================================ */
     @media (max-width: 768px) {
       nav { padding: 0 24px; }
       .nav-links { display: none; }
       section { padding: 64px 24px; }
       footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+      .gen-container { padding: 0 24px; }
+      .gen-hero { padding: 80px 24px 60px; }
     }
   </style>
 </head>
@@ -212,18 +527,23 @@
 
 <div class="grid-bg"></div>
 
-<!-- NAV -->
+<!-- ================================================================
+     MAIN SITE NAV
+     ================================================================ -->
 <nav>
   <div class="nav-logo">ArdorBot</div>
   <ul class="nav-links">
     <li><a href="#products">Products</a></li>
+    <li><a href="#genesis" class="genesis-nav">Genesis</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="https://slimlight.ardorbot.com" target="_blank" class="nav-cta">SlimLight Store →</a>
 </nav>
 
-<!-- HERO -->
+<!-- ================================================================
+     MAIN SITE HERO
+     ================================================================ -->
 <section class="hero">
   <div class="hero-badge fade-up"><span></span> AI Robotics Company</div>
   <h1 class="fade-up fade-up-1">
@@ -238,7 +558,9 @@
   </div>
 </section>
 
-<!-- PRODUCTS -->
+<!-- ================================================================
+     PRODUCTS SECTION
+     ================================================================ -->
 <section id="products">
   <div class="section-label">Products</div>
   <h2 class="section-title">Built for Performance.<br />Designed to Scale.</h2>
@@ -251,13 +573,19 @@
       <p>Ultra-slim Mini LED vehicle light identifier. &lt;5mm thickness, 5000+ nit brightness, IP67 waterproof. The next generation of automotive signature lighting.</p>
       <a href="https://slimlight.ardorbot.com" target="_blank" class="product-link">Visit Store →</a>
     </div>
-    <div class="product-card fade-up fade-up-2">
+    <div class="product-card genesis-card fade-up fade-up-2">
+      <div class="product-icon" style="background: linear-gradient(135deg, rgba(0,255,102,0.15), rgba(0,229,255,0.1));">📦</div>
+      <h3>Genesis</h3>
+      <p>The world's first physical AI CompanyOS. Plug it in, hire a C-Suite of 5 AI executives, and run your company on autopilot 24/7.</p>
+      <a href="#genesis" class="product-link genesis-link">Explore Genesis →</a>
+    </div>
+    <div class="product-card fade-up fade-up-3">
       <div class="product-icon">🤖</div>
       <h3>AI Robotics Platform</h3>
       <p>Custom AI agent systems for logistics, manufacturing, and smart infrastructure. Built on large language models with real-world sensor integration.</p>
       <a href="#contact" class="product-link">Inquire →</a>
     </div>
-    <div class="product-card fade-up fade-up-3">
+    <div class="product-card fade-up fade-up-4">
       <div class="product-icon">💡</div>
       <h3>Embedded Intelligence</h3>
       <p>AI-powered embedded modules for OEM/ODM integration. Speech, vision, and decision-making in a chip-scale footprint.</p>
@@ -268,7 +596,9 @@
 
 <div class="divider"></div>
 
-<!-- ABOUT -->
+<!-- ================================================================
+     ABOUT
+     ================================================================ -->
 <section id="about">
   <div class="stats-row">
     <div class="stat-item fade-up fade-up-1">
@@ -288,7 +618,6 @@
       <div class="stat-label">Product Standards</div>
     </div>
   </div>
-
   <p style="margin-top: 48px; color: var(--muted); max-width: 600px; line-height: 1.8; font-size: 0.95rem;">
     ArdorBot is an AI-first technology company headquartered in China, operating across consumer electronics, automotive components, and industrial robotics. We combine deep learning models with precision hardware engineering to create products that think and perform.
   </p>
@@ -308,11 +637,233 @@
   <div class="footer-brand">ArdorBot</div>
   <ul class="footer-links">
     <li><a href="https://slimlight.ardorbot.com" target="_blank">SlimLight Store</a></li>
+    <li><a href="#genesis">Genesis</a></li>
     <li><a href="mailto:contact@ardorbot.com">Contact</a></li>
     <li><a href="#about">About</a></li>
   </ul>
   <div class="footer-copy">© 2026 ArdorBot. All rights reserved.</div>
 </footer>
+
+<!-- ================================================================
+     GENESIS SUB-SECTION
+     ================================================================ -->
+<section id="genesis">
+
+  <!-- Hero -->
+  <div class="gen-hero">
+    <div>
+      <div class="gen-hero-eyebrow mono">SYSTEM_BOOTING // C-SUITE_ONLINE</div>
+      <h2>Don't Just Start a Project.<br /><span class="highlight">Boot Up Your Company.</span></h2>
+      <p class="gen-hero-sub">The world's first physical AI CompanyOS. Plug it in, insert your Founder's Key, and instantly hire a C-Suite of 5 AI executives who work 24/7. Your data stays local. Your company runs on autopilot.</p>
+      <div class="gen-hero-actions">
+        <a href="#genesis-waitlist" class="gen-glow-btn">Join the Early Access Waitlist →</a>
+        <a href="#genesis-features" class="ghost-btn-gen">See How It Works</a>
+      </div>
+      <div class="gen-hero-visual">
+        <div class="gen-box-render">
+          <div class="gen-box-body">
+            <div class="gen-box-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00FF66" stroke-width="1.5">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8M12 17v4"/>
+                <path d="M7 7h.01M7 10h.01M7 13h.01" stroke="#00E5FF"/>
+              </svg>
+            </div>
+            <div class="gen-leds">
+              <div class="gen-led"></div>
+              <div class="gen-led"></div>
+              <div class="gen-led"></div>
+              <div class="gen-led"></div>
+              <div class="gen-led"></div>
+            </div>
+            <div class="gen-box-label mono">GENESIS BOX — BATCH_01</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="gen-ticker">
+    <div class="gen-ticker-inner">
+      <span class="gen-ticker-item">[ 5 Autonomous Agents ]</span>
+      <span class="gen-ticker-item">[ 100% Local Data Vault ]</span>
+      <span class="gen-ticker-item">[ 24/7 Cron Heartbeat ]</span>
+      <span class="gen-ticker-item">[ Human-in-the-Loop ]</span>
+      <span class="gen-ticker-item">[ 1TB NVMe SSD ]</span>
+      <span class="gen-ticker-item">[ CompanyOS v1.0 ]</span>
+      <span class="gen-ticker-item">[ 5 Autonomous Agents ]</span>
+      <span class="gen-ticker-item">[ 100% Local Data Vault ]</span>
+      <span class="gen-ticker-item">[ 24/7 Cron Heartbeat ]</span>
+      <span class="gen-ticker-item">[ Human-in-the-Loop ]</span>
+      <span class="gen-ticker-item">[ 1TB NVMe SSD ]</span>
+      <span class="gen-ticker-item">[ CompanyOS v1.0 ]</span>
+    </div>
+  </div>
+
+  <!-- Problem vs Solution -->
+  <div class="gen-content">
+    <div class="gen-container">
+      <div class="section-label" style="color: var(--gen-accent);">// THE PROBLEM</div>
+      <div class="gen-split-grid" style="margin-top: 32px;">
+        <div class="gen-split-card problem gen-reveal">
+          <span class="gen-split-tag gen-tag-chaos mono">THE CHAOS</span>
+          <h3>You're a Founder, Not a Robot.</h3>
+          <p>Stop managing 20 different SaaS subscriptions, copy-pasting prompts, and doing grunt work. Current AI tools wait for you to type. If you sleep, they sleep. They don't know your business. They don't care.</p>
+        </div>
+        <div class="gen-split-card gen-reveal">
+          <span class="gen-split-tag gen-tag-genesis mono">THE SOLUTION</span>
+          <h3>Stop Managing Prompts. Start Managing People.</h3>
+          <p>Genesis isn't a tool; it's a team. It comes pre-installed with a COO, CTO, and CMO. You handle the vision (1%). The Box handles the execution (99%).</p>
+        </div>
+      </div>
+
+      <!-- Bento + Terminal -->
+      <div style="margin-top: 80px;" id="genesis-features">
+        <div class="section-label" style="color: var(--gen-accent);">// CORE CAPABILITIES</div>
+        <div class="section-title" style="color: var(--gen-text); margin-top: 16px; margin-bottom: 0;">Built Different. <span style="color: var(--gen-accent);">By Design.</span></div>
+      </div>
+
+      <div class="gen-bento">
+        <div class="gen-bento-card wide gen-reveal">
+          <div class="gen-bento-icon">❤️</div>
+          <h4>Works While You Dream</h4>
+          <p>Built-in chron-jobs. At 3 AM, your CMO pulls market data. At 8 AM, your COO texts you the Morning Report. No babysitting. No prompting. Your AI team runs on schedule — 24/7, 365.</p>
+        </div>
+        <div class="gen-bento-card gen-reveal">
+          <div class="gen-bento-icon">📊</div>
+          <h4>Command Your Empire</h4>
+          <p>Real-time dashboard. See agent compute heatmaps, token costs, and live task flows — all from a single terminal.</p>
+        </div>
+        <div class="gen-bento-card gen-reveal">
+          <div class="gen-bento-icon">🔒</div>
+          <h4>The Vault on Your Desk</h4>
+          <p>1TB NVMe SSD. Your IP, code, and clients never live on a public SaaS. The API computes; your Box remembers.</p>
+        </div>
+        <div class="gen-bento-card wide gen-reveal">
+          <div class="gen-bento-icon">🤝</div>
+          <h4>Never Lose Control</h4>
+          <p>When an agent hits a physical wall — spending money, signing contracts — it pauses and pushes an interactive card to your phone. Click Approve to resume. You're always the final call.</p>
+        </div>
+      </div>
+
+      <!-- Terminal -->
+      <div class="gen-terminal-wrap gen-reveal">
+        <div class="gen-terminal-bar">
+          <div class="gen-tb gen-tb-r"></div>
+          <div class="gen-tb gen-tb-y"></div>
+          <div class="gen-tb gen-tb-g"></div>
+          <span class="gen-terminal-title">genesis@dashboard ~ companyos</span>
+        </div>
+        <div class="gen-terminal-body">
+          <div class="gen-tline"><span class="gen-prompt">genesis@box:~$</span> <span class="gen-cmd">companyos --status</span></div>
+          <div class="gen-tline"><span class="gen-out">CompanyOS v1.0.4 — All systems nominal</span></div>
+          <div class="gen-tline">&nbsp;</div>
+          <div class="gen-tline"><span class="gen-prompt">genesis@box:~$</span> <span class="gen-cmd">agents --list</span></div>
+          <div class="gen-tline"><span class="gen-ok">●</span> <span class="gen-cmd">CMO</span> <span class="gen-out">— Scanning competitor feeds... &nbsp; 0.3 tokens/hr</span></div>
+          <div class="gen-tline"><span class="gen-ok">●</span> <span class="gen-cmd">COO</span> <span class="gen-out">— Morning Report ready &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pending_review</span></div>
+          <div class="gen-tline"><span class="gen-ok">●</span> <span class="gen-cmd">CTO</span> <span class="gen-out">— Compiling sprint metrics... &nbsp;&nbsp;&nbsp;&nbsp; 1.2 tokens/hr</span></div>
+          <div class="gen-tline"><span class="gen-ok">●</span> <span class="gen-cmd">CFO</span> <span class="gen-out">— P&amp;L analysis complete &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="gen-ok">✓ 0 warnings</span></span></div>
+          <div class="gen-tline"><span class="gen-ok">●</span> <span class="gen-cmd">CRO</span> <span class="gen-out">— A/B test #7 results posted &nbsp;&nbsp;&nbsp;&nbsp; <span class="gen-ok">+18% CTR</span></span></div>
+          <div class="gen-tline">&nbsp;</div>
+          <div class="gen-tline"><span class="gen-prompt">genesis@box:~$</span> <span class="gen-cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Founder Key -->
+  <div class="gen-founder-section">
+    <div class="gen-container">
+      <div class="gen-founder-grid">
+        <div class="gen-founder-visual gen-reveal">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#00FF66" stroke-width="1.5">
+            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+          </svg>
+          <div class="gen-key-slot mono">USB-C / NFC</div>
+          <div class="gen-founder-text">FOUNDER'S KEY — INSERT TO SYNC</div>
+        </div>
+        <div class="gen-reveal">
+          <div class="section-label" style="color: var(--gen-accent);">// THE RITUAL</div>
+          <h2 class="section-title" style="color: var(--gen-text); margin-top: 16px;">The Ritual of <span style="color: var(--gen-accent);">Creation</span></h2>
+          <p class="section-desc" style="color: var(--gen-text-muted);">Every Genesis Box requires physical authentication. No coding required — ever.</p>
+          <ol class="gen-founder-steps">
+            <li><span class="gen-step-num">1</span><span>Insert your Founder's Key into the Genesis Box</span></li>
+            <li><span class="gen-step-num">2</span><span>Connect to power + ethernet (or Wi-Fi)</span></li>
+            <li><span class="gen-step-num">3</span><span>Follow the 5-step Onboarding Wizard on your phone</span></li>
+            <li><span class="gen-step-num">4</span><span>Watch your company's heartbeat sync with your vision</span></li>
+            <li><span class="gen-step-num">5</span><span>You're live. Your AI C-Suite reports for duty.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="gen-cta-section" id="genesis-waitlist">
+    <div class="section-label mono" style="color: var(--gen-accent);">// LIMITED BATCH</div>
+    <h2>The Future of Solo-Founding<br />is <span style="color: var(--gen-accent);">Hardware.</span></h2>
+    <p>Be the first to secure your Genesis Box at Kickstarter pricing.<br />Limited to <strong style="color: var(--gen-text);">500 units</strong> in Batch 01.</p>
+    <form class="gen-waitlist-form" onsubmit="genHandleSubmit(event)">
+      <input type="email" placeholder="your@email.com" required id="genEmailInput" />
+      <button type="submit" class="gen-glow-btn" id="genSubmitBtn">Secure My Spot</button>
+    </form>
+    <p class="gen-disclaimer">No spam. Just updates on our Kickstarter launch. Ever.</p>
+    <div class="gen-success" id="genSuccessMsg">You're on the list. 🚀 We'll be in touch.</div>
+  </div>
+
+  <!-- Footer -->
+  <div class="gen-footer">
+    <div class="gen-container gen-footer-inner">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;letter-spacing:3px;color:var(--gen-text);">GENESIS</span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--gen-accent);box-shadow:0 0 7px var(--gen-accent);display:inline-block;"></span>
+      </div>
+      <div class="gen-footer-links">
+        <a href="#">Manifest</a>
+        <a href="https://twitter.com" target="_blank">Twitter / X</a>
+        <a href="https://discord.com" target="_blank">Discord</a>
+      </div>
+      <div class="gen-footer-copy">© 2026 ArdorBot. Designed for the 1% visionaries.</div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  // Genesis scroll reveal
+  (function() {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.gen-reveal').forEach(function(el) { observer.observe(el); });
+  })();
+
+  // Genesis waitlist
+  function genHandleSubmit(e) {
+    e.preventDefault();
+    var btn = document.getElementById('genSubmitBtn');
+    btn.textContent = 'Adding...';
+    setTimeout(function() {
+      btn.style.display = 'none';
+      document.getElementById('genEmailInput').style.display = 'none';
+      document.getElementById('genSuccessMsg').style.display = 'block';
+    }, 1000);
+  }
+</script>
+
+<style>
+  .ghost-btn-gen {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 24px;
+    background: transparent; color: var(--gen-text);
+    font-weight: 600; font-size: 14px; border-radius: 8px;
+    border: 1px solid var(--gen-border); cursor: pointer;
+    transition: all 0.3s ease; text-decoration: none;
+  }
+  .ghost-btn-gen:hover { border-color: var(--gen-accent); color: var(--gen-accent); }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+</style>
 
 </body>
 </html>
