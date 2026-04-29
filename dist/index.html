@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genesis Box — Boot Up Your Company</title>
+  <meta name="description" content="The world's first physical AI CompanyOS. Plug it in, insert your Founder's Key, and instantly hire a C-Suite of 5 AI executives who work 24/7." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #000000;
+      --bg-1: #0A0A0A;
+      --bg-2: #111111;
+      --border: #1e1e1e;
+      --border-subtle: #222222;
+      --accent: #00FF66;
+      --accent-dim: #00cc52;
+      --accent-glow: rgba(0, 255, 102, 0.15);
+      --blue: #00E5FF;
+      --blue-glow: rgba(0, 229, 255, 0.15);
+      --text: #ffffff;
+      --text-muted: #9CA3AF;
+      --text-dim: #6B7280;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .space { font-family: 'Space Grotesk', sans-serif; }
+
+    /* ---- SCROLLBAR ---- */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ---- UTIL ---- */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .glow-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px;
+      background: var(--accent); color: #000;
+      font-weight: 700; font-size: 15px; border-radius: 8px;
+      border: none; cursor: pointer;
+      box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .glow-btn:hover {
+      box-shadow: 0 0 30px rgba(0,255,102,0.4), 0 0 80px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+    .ghost-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 24px;
+      background: transparent; color: var(--text);
+      font-weight: 600; font-size: 14px; border-radius: 8px;
+      border: 1px solid var(--border); cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .ghost-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ---- HEADER ---- */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    header .container {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 20px; letter-spacing: 4px;
+      color: var(--text);
+    }
+    .logo-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.85); }
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: center; text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,255,102,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; color: var(--accent); letter-spacing: 2px;
+      margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -2px;
+      max-width: 900px; margin: 0 auto 28px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+    .hero h1 .highlight { color: var(--accent); }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-muted); line-height: 1.7;
+      max-width: 640px; margin: 0 auto 48px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+    .hero-actions {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s;
+    }
+    .hero-visual {
+      margin-top: 80px; opacity: 0; animation: fadeUp 1s ease forwards 1s;
+    }
+    .box-render {
+      display: inline-block;
+      width: 380px; max-width: 90vw;
+      aspect-ratio: 1.6/1;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 80px rgba(0,255,102,0.08), 0 40px 80px rgba(0,0,0,0.8);
+    }
+    .box-render::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,255,102,0.12) 0%, transparent 70%);
+    }
+    .box-body {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 16px;
+    }
+    .box-icon {
+      width: 80px; height: 80px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg-1);
+    }
+    .box-leds { display: flex; gap: 10px; }
+    .led {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: led-pulse 2s ease-in-out infinite;
+    }
+    .led:nth-child(2) { animation-delay: 0.3s; background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+    .led:nth-child(3) { animation-delay: 0.6s; }
+    .led:nth-child(4) { animation-delay: 0.9s; background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+    .led:nth-child(5) { animation-delay: 1.2s; }
+    @keyframes led-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .box-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--text-dim); letter-spacing: 3px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- TICKER ---- */
+    .ticker {
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-1);
+      padding: 16px 0; overflow: hidden;
+    }
+    .ticker-inner {
+      display: flex; gap: 0; white-space: nowrap;
+      animation: ticker 30s linear infinite;
+    }
+    .ticker-item {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 0 40px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; color: var(--text-muted); letter-spacing: 1px;
+    }
+    .ticker-item::before {
+      content: '◆'; color: var(--accent); font-size: 8px;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ---- SECTIONS ---- */
+    section { padding: 100px 0; }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--accent); letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -1px; margin-bottom: 20px;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--text-muted); line-height: 1.7; max-width: 560px;
+    }
+
+    /* ---- PROBLEM VS SOLUTION ---- */
+    .split-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    @media (max-width: 768px) { .split-grid { grid-template-columns: 1fr; } }
+    .split-card {
+      padding: 40px; border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--bg-2);
+      transition: border-color 0.3s ease;
+    }
+    .split-card:hover { border-color: var(--accent); }
+    .split-card.problem:hover { border-color: #ff6b6b; }
+    .split-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 2px;
+      padding: 4px 10px; border-radius: 4px;
+      display: inline-block; margin-bottom: 20px;
+    }
+    .tag-chaos { background: rgba(255,107,107,0.12); color: #ff6b6b; border: 1px solid rgba(255,107,107,0.2); }
+    .tag-genesis { background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(0,255,102,0.2); }
+    .split-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px; font-weight: 700; margin-bottom: 16px;
+    }
+    .split-card p { color: var(--text-muted); line-height: 1.75; font-size: 15px; }
+
+    /* ---- BENTO ---- */
+    .bento { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 16px; }
+    .bento-card {
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .bento-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 40px rgba(0,255,102,0.06);
+    }
+    .bento-card.wide { grid-column: span 2; }
+    @media (max-width: 900px) {
+      .bento { grid-template-columns: 1fr 1fr; }
+      .bento-card.wide { grid-column: span 2; }
+    }
+    @media (max-width: 600px) {
+      .bento { grid-template-columns: 1fr; }
+      .bento-card.wide { grid-column: span 1; }
+    }
+    .bento-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(0,255,102,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; font-size: 22px;
+    }
+    .bento-card h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px; font-weight: 700; margin-bottom: 10px;
+    }
+    .bento-card p { color: var(--text-muted); line-height: 1.7; font-size: 14px; }
+
+    /* ---- TERMINAL ---- */
+    .terminal-wrap {
+      background: var(--bg-1); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 60px;
+    }
+    .terminal-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px; background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+    }
+    .tb { width: 12px; height: 12px; border-radius: 50%; }
+    .tb-r { background: #ff5f57; }
+    .tb-y { background: #ffbd2e; }
+    .tb-g { background: #28c840; }
+    .terminal-title { font-size: 12px; color: var(--text-dim); margin-left: 8px; letter-spacing: 1px; }
+    .terminal-body { padding: 24px; min-height: 200px; }
+    .tline { font-size: 13px; line-height: 2; color: var(--text-muted); }
+    .tline .prompt { color: var(--accent); }
+    .tline .cmd { color: var(--text); }
+    .tline .out { color: var(--text-dim); }
+    .tline .ok { color: var(--blue); }
+    .tline .cursor {
+      display: inline-block; width: 8px; height: 16px;
+      background: var(--accent); vertical-align: middle;
+      animation: blink 1s step-end infinite; margin-left: 2px;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* ---- FOUNDER KEY ---- */
+    .founder-section { background: var(--bg-1); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+    .founder-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .founder-grid { grid-template-columns: 1fr; gap: 40px; } }
+    .founder-visual {
+      aspect-ratio: 1/1; border-radius: 20px;
+      background: var(--bg-2); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 20px;
+      position: relative; overflow: hidden;
+    }
+    .founder-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,255,102,0.1) 0%, transparent 60%);
+    }
+    .key-slot {
+      width: 80px; height: 30px; border-radius: 6px;
+      border: 2px dashed var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--text-dim); letter-spacing: 2px;
+    }
+    .founder-visual-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--text-dim); letter-spacing: 2px; text-align: center;
+    }
+    .founder-steps { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+    .founder-steps li {
+      display: flex; align-items: flex-start; gap: 16px;
+      font-size: 15px; color: var(--text-muted); line-height: 1.6;
+    }
+    .step-num {
+      flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+      background: var(--accent-glow); border: 1px solid rgba(0,255,102,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent);
+    }
+
+    /* ---- BOTTOM CTA ---- */
+    .cta-section {
+      text-align: center;
+      padding: 120px 24px;
+      position: relative;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,255,102,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section .section-title { max-width: 600px; margin: 0 auto 16px; }
+    .cta-section .section-sub { margin: 0 auto 48px; }
+    .waitlist-form {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 500px; margin: 0 auto;
+    }
+    .waitlist-form input {
+      flex: 1; min-width: 240px;
+      padding: 14px 20px; border-radius: 8px;
+      background: var(--bg-2); border: 1px solid var(--border);
+      color: var(--text); font-size: 15px; font-family: 'Inter', sans-serif;
+      outline: none; transition: border-color 0.3s;
+    }
+    .waitlist-form input::placeholder { color: var(--text-dim); }
+    .waitlist-form input:focus { border-color: var(--accent); }
+    .disclaimer { font-size: 13px; color: var(--text-dim); margin-top: 16px; }
+
+    /* ---- FOOTER ---- */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0;
+    }
+    footer .container {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 14px; color: var(--text-dim); text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 13px; color: var(--text-dim); }
+
+    /* ---- SCROLL ANIMATIONS ---- */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <a href="#" class="logo">
+      <span class="logo-text">GENESIS</span>
+      <span class="logo-dot"></span>
+    </a>
+    <a href="#waitlist" class="ghost-btn">Join Waitlist</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow mono">SYSTEM_BOOTING // C-SUITE_ONLINE</div>
+    <h1>Don't Just Start a Project.<br /><span class="highlight">Boot Up Your Company.</span></h1>
+    <p class="hero-sub">The world's first physical AI CompanyOS. Plug it in, insert your Founder's Key, and instantly hire a C-Suite of 5 AI executives who work 24/7. Your data stays local. Your company runs on autopilot.</p>
+    <div class="hero-actions">
+      <a href="#waitlist" class="glow-btn">Join the Early Access Waitlist →</a>
+      <a href="#features" class="ghost-btn">See How It Works</a>
+    </div>
+    <div class="hero-visual">
+      <div class="box-render">
+        <div class="box-body">
+          <div class="box-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00FF66" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+              <path d="M7 7h.01M7 10h.01M7 13h.01" stroke="#00E5FF"/>
+            </svg>
+          </div>
+          <div class="box-leds">
+            <div class="led"></div>
+            <div class="led"></div>
+            <div class="led"></div>
+            <div class="led"></div>
+            <div class="led"></div>
+          </div>
+          <div class="box-label mono">GENESIS BOX — BATCH_01</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="tickerInner">
+    <span class="ticker-item">[ 5 Autonomous Agents ]</span>
+    <span class="ticker-item">[ 100% Local Data Vault ]</span>
+    <span class="ticker-item">[ 24/7 Cron Heartbeat ]</span>
+    <span class="ticker-item">[ Human-in-the-Loop ]</span>
+    <span class="ticker-item">[ 1TB NVMe SSD ]</span>
+    <span class="ticker-item">[ CompanyOS v1.0 ]</span>
+    <span class="ticker-item">[ 5 Autonomous Agents ]</span>
+    <span class="ticker-item">[ 100% Local Data Vault ]</span>
+    <span class="ticker-item">[ 24/7 Cron Heartbeat ]</span>
+    <span class="ticker-item">[ Human-in-the-Loop ]</span>
+    <span class="ticker-item">[ 1TB NVMe SSD ]</span>
+    <span class="ticker-item">[ CompanyOS v1.0 ]</span>
+  </div>
+</div>
+
+<!-- PROBLEM VS SOLUTION -->
+<section>
+  <div class="container">
+    <div class="section-label">// THE PROBLEM</div>
+    <div class="split-grid">
+      <div class="split-card problem reveal">
+        <span class="split-tag tag-chaos mono">THE CHAOS</span>
+        <h3>You're a Founder, Not a Robot.</h3>
+        <p>Stop managing 20 different SaaS subscriptions, copy-pasting prompts, and doing grunt work. Current AI tools wait for you to type. If you sleep, they sleep. They don't know your business. They don't care.</p>
+      </div>
+      <div class="split-card reveal">
+        <span class="split-tag tag-genesis mono">THE SOLUTION</span>
+        <h3>Stop Managing Prompts. Start Managing People.</h3>
+        <p>Genesis isn't a tool; it's a team. It comes pre-installed with a COO, CTO, and CMO. You handle the vision (1%). The Box handles the execution (99%).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENTO FEATURES -->
+<section id="features" style="background: var(--bg-1); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="section-label">// CORE CAPABILITIES</div>
+    <div class="section-title" style="margin-bottom: 48px;">Built Different. <span style="color: var(--accent);">By Design.</span></div>
+    <div class="bento">
+      <div class="bento-card wide reveal">
+        <div class="bento-icon">❤️</div>
+        <h4>Works While You Dream</h4>
+        <p>Built-in chron-jobs. At 3 AM, your CMO pulls market data. At 8 AM, your COO texts you the Morning Report. No babysitting. No prompting. Your AI team runs on schedule — 24/7, 365.</p>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-icon">📊</div>
+        <h4>Command Your Empire</h4>
+        <p>Real-time dashboard. See agent compute heatmaps, token costs, and live task flows — all from a single terminal.</p>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-icon">🔒</div>
+        <h4>The Vault on Your Desk</h4>
+        <p>1TB NVMe SSD. Your IP, code, and clients never live on a public SaaS. The API computes; your Box remembers.</p>
+      </div>
+      <div class="bento-card wide reveal">
+        <div class="bento-icon">🤝</div>
+        <h4>Never Lose Control</h4>
+        <p>When an agent hits a physical wall — spending money, signing contracts — it pauses and pushes an interactive card to your phone. Click Approve to resume. You're always the final call.</p>
+      </div>
+    </div>
+
+    <!-- TERMINAL -->
+    <div class="terminal-wrap reveal">
+      <div class="terminal-bar">
+        <div class="tb tb-r"></div>
+        <div class="tb tb-y"></div>
+        <div class="tb tb-g"></div>
+        <span class="terminal-title">genesis@dashboard ~ companyos</span>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <div class="tline"><span class="prompt">genesis@box:~$</span> <span class="cmd">companyos --status</span></div>
+        <div class="tline"><span class="out">CompanyOS v1.0.4 — All systems nominal</span></div>
+        <div class="tline">&nbsp;</div>
+        <div class="tline"><span class="prompt">genesis@box:~$</span> <span class="cmd">agents --list</span></div>
+        <div class="tline"><span class="ok">●</span> <span class="cmd">CMO</span> <span class="out">— Scanning competitor feeds... &nbsp; 0.3 tokens/hr</span></div>
+        <div class="tline"><span class="ok">●</span> <span class="cmd">COO</span> <span class="out">— Morning Report ready &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pending_review</span></div>
+        <div class="tline"><span class="ok">●</span> <span class="cmd">CTO</span> <span class="out">— Compiling sprint metrics... &nbsp;&nbsp;&nbsp;&nbsp; 1.2 tokens/hr</span></div>
+        <div class="tline"><span class="ok">●</span> <span class="cmd">CFO</span> <span class="out">— P&L analysis complete &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="ok">✓ 0 warnings</span></span></div>
+        <div class="tline"><span class="ok">●</span> <span class="cmd">CRO</span> <span class="out">— A/B test #7 results posted &nbsp;&nbsp;&nbsp;&nbsp; <span class="ok">+18% CTR</span></span></div>
+        <div class="tline">&nbsp;</div>
+        <div class="tline"><span class="prompt">genesis@box:~$</span> <span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER'S KEY -->
+<section class="founder-section">
+  <div class="container">
+    <div class="founder-grid">
+      <div class="founder-visual reveal">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#00FF66" stroke-width="1.5">
+          <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+        </svg>
+        <div class="key-slot mono">USB-C / NFC</div>
+        <div class="founder-visual-text">FOUNDER'S KEY — INSERT TO SYNC</div>
+      </div>
+      <div class="reveal">
+        <div class="section-label">// THE RITUAL</div>
+        <div class="section-title">The Ritual of <span style="color: var(--accent);">Creation</span></div>
+        <p class="section-sub">Every Genesis Box requires physical authentication. No兰 coding required — ever.</p>
+        <ol class="founder-steps">
+          <li><span class="step-num">1</span><span>Insert your Founder's Key into the Genesis Box</span></li>
+          <li><span class="step-num">2</span><span>Connect to power + ethernet (or Wi-Fi)</span></li>
+          <li><span class="step-num">3</span><span>Follow the 5-step Onboarding Wizard on your phone</span></li>
+          <li><span class="step-num">4</span><span>Watch your company's heartbeat sync with your vision</span></li>
+          <li><span class="step-num">5</span><span>You're live. Your AI C-Suite reports for duty.</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="cta-section" id="waitlist">
+  <div class="section-label mono">// LIMITED BATCH</div>
+  <h2 class="section-title" style="font-size: clamp(28px, 5vw, 56px);">The Future of Solo-Founding<br />is <span style="color: var(--accent);">Hardware.</span></h2>
+  <p class="section-sub" style="font-size: 18px;">Be the first to secure your Genesis Box at Kickstarter pricing.<br />Limited to <strong style="color: var(--text);">500 units</strong> in Batch 01.</p>
+  <form class="waitlist-form" onsubmit="handleSubmit(event)">
+    <input type="email" placeholder="your@email.com" required id="emailInput" />
+    <button type="submit" class="glow-btn" id="submitBtn">Secure My Spot</button>
+  </form>
+  <p class="disclaimer">No spam. Just updates on our Kickstarter launch. Ever.</p>
+  <div id="successMsg" style="display:none; margin-top: 20px; color: var(--accent); font-weight: 600;">You're on the list. 🚀 We'll be in touch.</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="#">Manifest</a>
+      <a href="https://twitter.com" target="_blank">Twitter / X</a>
+      <a href="https://discord.com" target="_blank">Discord</a>
+    </div>
+    <div class="footer-copy">© 2026 ArdorBot. Designed for the 1% visionaries.</div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Waitlist form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const email = document.getElementById('emailInput').value;
+    btn.textContent = 'Adding...';
+    setTimeout(() => {
+      btn.style.display = 'none';
+      document.getElementById('emailInput').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }, 1000);
+  }
+</script>
